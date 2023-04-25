@@ -46,7 +46,7 @@ async def info(ctx):
 async def clear(ctx):
     channel = ctx.channel
     messages = []
-    async for message in channel.history(limit=30):
+    async for message in channel.history(limit=200):
         messages.append(message.id)
     
     for id in messages:
