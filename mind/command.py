@@ -53,8 +53,7 @@ async def clear(ctx):
         message = await channel.fetch_message(id)
         await message.delete()
         
-        
-         
+          
    
 
 
