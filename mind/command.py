@@ -41,6 +41,19 @@ async def info(ctx):
     print(ctx.guild.voice_channels)
     for na in ctx.guild.voice_channels:
          print(na)
+
+@bot.command()
+async def clear(ctx):
+    channel = ctx.channel
+    messages = []
+    async for message in channel.history(limit=30):
+        messages.append(message.id)
+    
+    for id in messages:
+        message = await channel.fetch_message(id)
+        await message.delete()
+        
+        
          
    
 
