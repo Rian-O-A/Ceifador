@@ -13,34 +13,24 @@ async def on_ready():
 
 @bot.command()
 async def move(ctx, channel : discord.VoiceChannel, *members : discord.Member):
+    # PEGAR o canal de voice de origem 
     canal = ctx.author.voice.channel
-    
-    print(f"Estou no canal de voz: {canal.name}")
-   
+
     for member in members:
         await member.move_to(channel)
 
    
-    print(f"{members} foi movido para {channel}!")
+    
 
 @bot.command()
-async def centralizar(ctx,*members : discord.Member):
+async def centralizar(ctx):
     canal = ctx.author.voice.channel
     
-    print(ctx.guild.voice_channels[0].members)
-   
-    for member in members:
-        await member.move_to(canal)
-
-   
-    print(f"{members} foi movido para {canal.name}!")
-
-@bot.command()
-async def info(ctx):
-    
-    print(ctx.guild.voice_channels)
     for na in ctx.guild.voice_channels:
-         print(na)
+         if na.members != []:
+            for men in na.members:
+                await men.move_to(canal)
+
 
 @bot.command()
 async def clear(ctx):
