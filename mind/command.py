@@ -45,7 +45,8 @@ async def clear(ctx):
     for id in messages:
         message = await channel.fetch_message(id)
         await message.delete()
-        
+
+       
 @bot.command()
 async def muteall(ctx):
     # Verifica se o autor do comando está em um canal de voz
