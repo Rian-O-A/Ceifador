@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
 
-token = os.environ['token']
+load_dotenv()
 
+token = os.environ['tokenDiscord']

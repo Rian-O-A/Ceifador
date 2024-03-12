@@ -42,12 +42,42 @@ async def clear(ctx):
     channel = ctx.channel
     messages = []
     await ctx.send("Sim meu senhor, limparei toda essa imundice!")
-    async for message in channel.history(limit=200):
+    async for message in channel.history(limit=15):
         messages.append(message.id)
     
     for id in messages:
         message = await channel.fetch_message(id)
         await message.delete()
+        
+@bot.command()
+async def clearall(ctx):
+    user = ctx.author.discriminator
+    print(user)
+    if user: 
+        
+        guild = ctx.guild
+        channels = guild.text_channels
+        del channels[channels.index(ctx.channel)]
+        await ctx.send("Sim meu senhor, limparei toda essa imundice!")
+        await ctx.send(">>>>>>>>>>>>>>>>>>>>>>>>>    Limpando  >>>>>>>>>>>>>>>>>>>>>>>>> ")
+        for channel in channels:
+            await ctx.send(f"- {channel}")
+
+            
+            messages = []
+            async for message in channel.history(limit=7):
+                messages.append(message.id)
+            
+            for id in messages:
+                message = await channel.fetch_message(id)
+                await message.delete()
+
+        await ctx.send(">>>>>>>>>>>>>>>>>>>>>>>>>    Fim  >>>>>>>>>>>>>>>>>>>>>>>>> ")
+            
+    else:
+        await ctx.send("Não force, verme repugnante! Conheça o seu lugar e recue!")
+        
+        
 
        
 @bot.command()
