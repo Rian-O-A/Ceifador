@@ -57,10 +57,25 @@ async def clearall(ctx):
         
         guild = ctx.guild
         channels = guild.text_channels
+        channels_voice = guild.voice_channels
         del channels[channels.index(ctx.channel)]
         await ctx.send("Sim meu senhor, limparei toda essa imundice!")
         await ctx.send(">>>>>>>>>>>>>>>>>>>>>>>>>    Limpando  >>>>>>>>>>>>>>>>>>>>>>>>> ")
+        await ctx.send(">>>> Limpando canais de texto")
         for channel in channels:
+            await ctx.send(f"- {channel}")
+
+            
+            messages = []
+            async for message in channel.history(limit=7):
+                messages.append(message.id)
+            
+            for id in messages:
+                message = await channel.fetch_message(id)
+                await message.delete()
+
+        await ctx.send(">>>> Limpando canais de voz")
+        for channel in channels_voice:
             await ctx.send(f"- {channel}")
 
             
